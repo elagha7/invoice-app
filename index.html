@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Invoice App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="sidebar__logo">
+        <svg width="28" height="26" viewBox="0 0 28 26">
+          <path
+            fill="#FFF"
+            fill-rule="evenodd"
+            d="M20.513 0C24.965 2.309 28 6.91 28 12.21 28 19.826 21.732 26 14 26S0 19.826 0 12.21C0 6.91 3.035 2.309 7.487 0L14 12.9z"
+          />
+        </svg>
+      </div>
+      <div class="sidebar__bottom">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 20 20">
+            <path
+              d="M9.817 16.18a.96.96 0 01.953.848l.007.112v1.535a.96.96 0 01-1.913.112l-.006-.112V17.14c0-.53.43-.96.96-.96zm-4.5-1.863c.347.346.373.89.08 1.266l-.08.09-1.085 1.087a.96.96 0 01-1.437-1.267l.08-.09 1.086-1.086a.959.959 0 011.357 0zm10.356 0l1.086 1.086a.959.959 0 11-1.357 1.357l-1.085-1.086a.959.959 0 111.356-1.357zM9.817 4.9a4.924 4.924 0 014.918 4.918 4.924 4.924 0 01-4.918 4.918A4.924 4.924 0 014.9 9.818 4.924 4.924 0 019.817 4.9zm8.858 3.958a.96.96 0 110 1.919H17.14a.96.96 0 110-1.92h1.535zm-16.18 0a.96.96 0 01.112 1.912l-.112.007H.96a.96.96 0 01-.112-1.913l.112-.006h1.534zm14.264-5.983a.96.96 0 010 1.357l-1.086 1.086a.96.96 0 11-1.356-1.357l1.085-1.086a.96.96 0 011.357 0zm-12.617-.08l.09.08 1.086 1.086A.96.96 0 014.05 5.398l-.09-.08-1.086-1.086a.959.959 0 011.267-1.436zM9.817 0c.53 0 .96.43.96.96v1.535a.96.96 0 01-1.92 0V.96c0-.53.43-.96.96-.96z"
+              fill="#858BB2"
+              fill-rule="nonzero"
+            />
+          </svg>
+          <svg
+            class="icon-moon"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            hidden
+          >
+            <path
+              d="M19.502 11.342a.703.703 0 00-.588.128 7.499 7.499 0 01-2.275 1.33 7.123 7.123 0 01-2.581.46A7.516 7.516 0 018.74 11.06a7.516 7.516 0 01-2.198-5.316c0-.87.153-1.713.41-2.48.28-.817.69-1.559 1.226-2.197a.652.652 0 00-.102-.92.703.703 0 00-.588-.128C5.316.607 3.425 1.91 2.07 3.649A10.082 10.082 0 000 9.783C0 12.57 1.125 15.1 2.965 16.94a10.04 10.04 0 007.156 2.965c2.352 0 4.524-.818 6.262-2.173a10.078 10.078 0 003.579-5.597.62.62 0 00-.46-.793z"
+              fill="#858BB2"
+              fill-rule="nonzero"
+            />
+          </svg>
+        </button>
+        <div class="avatar-ring">
+          <img class="avatar" src="assets/image-avatar.jpg" alt="User avatar" />
+        </div>
+      </div>
+    </aside>
+
+    <main class="app">
+      <!-- ===================== LIST VIEW ===================== -->
+      <div class="wrap" id="listView">
+        <header class="topbar">
+          <div>
+            <h1>Invoices</h1>
+            <p class="topbar__count" id="invoiceCount">
+              There are 7 total invoices
+            </p>
+          </div>
+
+          <div class="topbar__actions">
+            <button class="filter" id="filterBtn">
+              Filter <span class="filter__by">by status</span>
+              <svg width="11" height="7" viewBox="0 0 11 7">
+                <path
+                  d="M1 1l4.228 4.228L9.456 1"
+                  stroke="#7C5DFA"
+                  stroke-width="2"
+                  fill="none"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </button>
+
+            <ul class="filter__menu" id="filterMenu" hidden>
+              <li>
+                <label
+                  ><input type="checkbox" value="draft" checked /> Draft</label
+                >
+              </li>
+              <li>
+                <label
+                  ><input type="checkbox" value="pending" checked />
+                  Pending</label
+                >
+              </li>
+              <li>
+                <label
+                  ><input type="checkbox" value="paid" checked /> Paid</label
+                >
+              </li>
+            </ul>
+
+            <button class="btn-new" id="newInvoiceBtn">
+              <span class="btn-new__icon"
+                ><svg width="11" height="11" viewBox="0 0 11 11">
+                  <path
+                    d="M6.313 10.023v-3.71h3.71v-2.58h-3.71V.023h-2.58v3.71H.023v2.58h3.71v3.71z"
+                    fill="#7C5DFA"
+                    fill-rule="nonzero"
+                  /></svg
+              ></span>
+              New Invoice
+            </button>
+          </div>
+        </header>
+
+        <ul class="invoice-list" id="invoiceList"></ul>
+
+        <div class="empty-state" id="emptyState" hidden>
+          <img src="assets/illustration-empty.svg" alt="" width="200" />
+          <h2>There is nothing here</h2>
+          <p>
+            Create an invoice by clicking the
+            <strong>New Invoice</strong> button and get started
+          </p>
+        </div>
+      </div>
+
+      <!-- ===================== DETAIL VIEW ===================== -->
+      <div class="wrap detail-view" id="detailView" hidden>
+        <button class="back-btn" id="backBtn">
+          <svg width="7" height="10" viewBox="0 0 7 10">
+            <path
+              d="M6.342.886L2.114 5.114l4.228 4.228"
+              stroke="#9277FF"
+              stroke-width="2"
+              fill="none"
+              fill-rule="evenodd"
+            />
+          </svg>
+          Go back
+        </button>
+
+        <div class="detail-statusbar">
+          <div class="detail-statusbar__status">
+            Status
+            <div class="status" id="detailStatus">
+              <span class="status__dot"></span
+              ><span id="detailStatusText"></span>
+            </div>
+          </div>
+          <div class="detail-statusbar__actions">
+            <button class="btn-ghost" id="editBtn">Edit</button>
+            <button class="btn-danger" id="deleteBtn">Delete</button>
+            <button class="btn-new" id="markPaidBtn">Mark as Paid</button>
+          </div>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-card__top">
+            <div>
+              <div class="detail-card__id">#<span id="dId"></span></div>
+              <div class="detail-card__desc" id="dDescription"></div>
+            </div>
+            <div class="detail-card__from">
+              <div id="dFromStreet"></div>
+              <div id="dFromCity"></div>
+              <div id="dFromPost"></div>
+              <div id="dFromCountry"></div>
+            </div>
+          </div>
+
+          <div class="detail-card__meta">
+            <div class="meta-block">
+              <span>Invoice Date</span>
+              <strong id="dDate"></strong>
+              <span class="meta-spacer">Payment Due</span>
+              <strong id="dDue"></strong>
+            </div>
+            <div class="meta-block">
+              <span>Bill To</span>
+              <strong id="dToName"></strong>
+              <div id="dToStreet"></div>
+              <div id="dToCity"></div>
+              <div id="dToPost"></div>
+              <div id="dToCountry"></div>
+            </div>
+            <div class="meta-block">
+              <span>Sent to</span>
+              <strong id="dToEmail"></strong>
+            </div>
+          </div>
+
+          <div class="detail-card__items">
+            <table class="items-table">
+              <thead>
+                <tr>
+                  <th>Item Name</th>
+                  <th>QTY.</th>
+                  <th>Price</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody id="dItemsBody"></tbody>
+            </table>
+            <div class="items-total">
+              <span>Amount Due</span>
+              <strong id="dTotal"></strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ===================== OVERLAY ===================== -->
+    <div class="overlay" id="overlay" hidden></div>
+
+    <!-- ===================== FORM PANEL (Create / Edit) ===================== -->
+    <aside class="form-panel" id="formPanel" hidden>
+      <div class="form-panel__inner">
+        <h2 id="formTitle">New Invoice</h2>
+
+        <form id="invoiceForm">
+          <h3 class="form-section-title accent">Bill From</h3>
+          <div class="form-field">
+            <label>Street Address</label>
+            <input type="text" name="fromStreet" required />
+            <span class="error-text">can't be empty</span>
+          </div>
+          <div class="form-grid form-grid--3">
+            <div class="form-field">
+              <label>City</label
+              ><input type="text" name="fromCity" required /><span
+                class="error-text"
+                >can't be empty</span
+              >
+            </div>
+            <div class="form-field">
+              <label>Post Code</label
+              ><input type="text" name="fromPost" required /><span
+                class="error-text"
+                >can't be empty</span
+              >
+            </div>
+            <div class="form-field">
+              <label>Country</label
+              ><input type="text" name="fromCountry" required /><span
+                class="error-text"
+                >can't be empty</span
+              >
+            </div>
+          </div>
+
+          <h3 class="form-section-title accent">Bill To</h3>
+          <div class="form-field">
+            <label>Client's Name</label>
+            <input type="text" name="toName" required />
+            <span class="error-text">can't be empty</span>
+          </div>
+          <div class="form-field">
+            <label>Client's Email</label>
+            <input
+              type="email"
+              name="toEmail"
+              placeholder="e.g. email@example.com"
+              required
+            />
+            <span class="error-text">can't be empty</span>
+          </div>
+          <div class="form-field">
+            <label>Street Address</label>
+            <input type="text" name="toStreet" required />
+            <span class="error-text">can't be empty</span>
+          </div>
+          <div class="form-grid form-grid--3">
+            <div class="form-field">
+              <label>City</label
+              ><input type="text" name="toCity" required /><span
+                class="error-text"
+                >can't be empty</span
+              >
+            </div>
+            <div class="form-field">
+              <label>Post Code</label
+              ><input type="text" name="toPost" required /><span
+                class="error-text"
+                >can't be empty</span
+              >
+            </div>
+            <div class="form-field">
+              <label>Country</label
+              ><input type="text" name="toCountry" required /><span
+                class="error-text"
+                >can't be empty</span
+              >
+            </div>
+          </div>
+
+          <div class="form-grid form-grid--2">
+            <div class="form-field">
+              <label>Invoice Date</label>
+              <div class="input-icon">
+                <input type="date" name="invoiceDate" />
+                <svg width="16" height="16" viewBox="0 0 16 16">
+                  <path
+                    d="M14 2h-.667V.667A.667.667 0 0012.667 0H12a.667.667 0 00-.667.667V2H4.667V.667A.667.667 0 004 0h-.667a.667.667 0 00-.666.667V2H2C.897 2 0 2.897 0 4v10c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zm.667 12c0 .367-.3.667-.667.667H2A.668.668 0 011.333 14V6.693h13.334V14z"
+                    fill="#7E88C3"
+                    fill-rule="nonzero"
+                    opacity=".5"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="form-field">
+              <label>Payment Terms</label>
+              <select name="paymentTerms">
+                <option value="1">Net 1 Day</option>
+                <option value="7">Net 7 Days</option>
+                <option value="14">Net 14 Days</option>
+                <option value="30" selected>Net 30 Days</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label>Project Description</label>
+            <input
+              type="text"
+              name="description"
+              placeholder="e.g. Graphic Design Service"
+              required
+            />
+            <span class="error-text">can't be empty</span>
+          </div>
+
+          <h3 class="form-section-title">Item List</h3>
+          <div class="items-form-head">
+            <span>Item Name</span><span>Qty.</span><span>Price</span
+            ><span>Total</span><span></span>
+          </div>
+          <div id="itemRows"></div>
+          <button type="button" class="btn-add-item" id="addItemBtn">
+            + Add New Item
+          </button>
+
+          <div class="form-actions" id="formActions"></div>
+        </form>
+      </div>
+    </aside>
+
+    <!-- ===================== DELETE MODAL ===================== -->
+    <div class="modal" id="deleteModal" hidden>
+      <div class="modal-box">
+        <h2>Confirm Deletion</h2>
+        <p>
+          Are you sure you want to delete invoice #<span id="delId"></span>?
+          This action cannot be undone.
+        </p>
+        <div class="modal-actions">
+          <button class="btn-ghost" id="cancelDeleteBtn">Cancel</button>
+          <button class="btn-danger" id="confirmDeleteBtn">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
